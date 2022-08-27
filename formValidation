@@ -1,0 +1,45 @@
+import React, { useState, useEffect } from "react";
+
+const App = () => {
+  const [name, setName] = useState({ value: "", error: false });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name.value.length < 4) {
+      setName({ ...name, error: true });
+      return;
+    }
+    console.log("data", name);
+  };
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <label>User Name</label>
+        <input
+          id="userName"
+          name="userName"
+          onChange={(e) => setName({ value: e.target.value, error: false })}
+        />
+        {name.error && (
+          <p id="userNameErrorMsg" style={{ color: "red" }}>
+            Please enter valid name
+          </p>
+        )}
+
+        {/* <label>
+          Password:
+          <input
+            name="password"
+            onChange={(e) => setName({ ...name, password: e.target.value })}
+          />
+        </label> */}
+        <button type="submit">Submit</button>
+      </form>
+
+      <div>User Name: {name.value}</div>
+      {/* <div>Password: {name.password}</div> */}
+    </>
+  );
+};
+
+export default App;
